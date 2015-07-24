@@ -27,10 +27,8 @@
 -(void)loadView {
     [super loadView];
     
-//    UIImage *backgroundImage = [UIImage imageNamed:@"background"];
-//    self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
-    self.view.backgroundColor = [UIColor purpleColor];
-
+    UIImage *backgroundImage = [UIImage imageNamed:@"background"];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
 }
 
 - (void)viewDidLoad {
@@ -45,7 +43,6 @@
     [self.locationManager requestWhenInUseAuthorization];
     
     [self.locationManager startUpdatingLocation];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -118,7 +115,6 @@
     NSDictionary *sys = [dictWithWeather objectForKey:@"sys"];
     weatherMadel.country = sys[@"country"];
     self.cityLabel.text = [NSString stringWithFormat:@"%@, %@", weatherMadel.cityName, weatherMadel.country];
-    NSLog(@"%@, %@", weatherMadel.cityName, weatherMadel.country);
     
     NSInteger time = [[dictWithWeather objectForKey:@"dt"] integerValue];
     NSString *stringWithTime = [weatherMadel dateFromUnixFormat:time];
@@ -131,9 +127,9 @@
     weatherMadel.weatherTemp = [weatherMadel convertTemperature:tempK];
     weatherMadel.weatherMaxTemp = [weatherMadel convertTemperature:maxTempK];
     weatherMadel.weatherMinTemp = [weatherMadel convertTemperature:minTempK];
-    self.tempLabel.text = [NSString stringWithFormat:@"%li", weatherMadel.weatherTemp];
-    self.maxTempLabel.text = [NSString stringWithFormat:@"%li", weatherMadel.weatherMaxTemp];
-    self.minTempLabel.text = [NSString stringWithFormat:@"%li", weatherMadel.weatherMinTemp];
+    self.tempLabel.text = [NSString stringWithFormat:@"%li°", weatherMadel.weatherTemp];
+    self.maxTempLabel.text = [NSString stringWithFormat:@"%li°", weatherMadel.weatherMaxTemp];
+    self.minTempLabel.text = [NSString stringWithFormat:@"%li°", weatherMadel.weatherMinTemp];
     
     weatherMadel.weatherHumidity = [main[@"humidity"]integerValue];
     self.humidityLabel.text = [NSString stringWithFormat:@"%li", weatherMadel.weatherHumidity];
@@ -152,9 +148,6 @@
     
     UIImage *icon = [weatherMadel updateWeatherIcon:condition isNight:nightTime];
     self.iconImageView.image = icon;
-
-    NSLog(@"%@", weatherMadel.cityName);
-    NSLog(@"%li", weatherMadel.weatherTemp);
 }
 
 - (void)failure {
@@ -186,7 +179,6 @@
         CLLocationCoordinate2D coords  = CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
         
         [self.weatherModel weatherForLocation:coords];
-        NSLog(@"%f, %f", coords.latitude, coords.longitude);
     }
 }
 

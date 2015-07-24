@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		455AC9541B61CC4000B3C1B5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 455AC9531B61CC4000B3C1B5 /* CoreLocation.framework */; };
+		455D447F1B62D9200028FF76 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 455D447E1B62D9200028FF76 /* background.png */; };
 		456F6DC71B601EC10052E638 /* 01d.png in Resources */ = {isa = PBXBuildFile; fileRef = 456F6DB51B601EC10052E638 /* 01d.png */; };
 		456F6DC81B601EC10052E638 /* 01n.png in Resources */ = {isa = PBXBuildFile; fileRef = 456F6DB61B601EC10052E638 /* 01n.png */; };
 		456F6DC91B601EC10052E638 /* 02d.png in Resources */ = {isa = PBXBuildFile; fileRef = 456F6DB71B601EC10052E638 /* 02d.png */; };
@@ -50,6 +51,7 @@
 /* Begin PBXFileReference section */
 		2974EC08352114C0DA29FFF9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		455AC9531B61CC4000B3C1B5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		455D447E1B62D9200028FF76 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		456F6DB51B601EC10052E638 /* 01d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01d.png; sourceTree = "<group>"; };
 		456F6DB61B601EC10052E638 /* 01n.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01n.png; sourceTree = "<group>"; };
 		456F6DB71B601EC10052E638 /* 02d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 02d.png; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 		456F6DB41B601EC10052E638 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				455D447E1B62D9200028FF76 /* background.png */,
 				456F6DB51B601EC10052E638 /* 01d.png */,
 				456F6DB61B601EC10052E638 /* 01n.png */,
 				456F6DB71B601EC10052E638 /* 02d.png */,
@@ -313,6 +316,7 @@
 				456F6DD81B601EC10052E638 /* 50n.png in Resources */,
 				456F6DCF1B601EC10052E638 /* 09d.png in Resources */,
 				45E5E6B31B5EE2530016BA52 /* Main.storyboard in Resources */,
+				455D447F1B62D9200028FF76 /* background.png in Resources */,
 				456F6DCC1B601EC10052E638 /* 03n.png in Resources */,
 				456F6DCA1B601EC10052E638 /* 02n.png in Resources */,
 				456F6DD41B601EC10052E638 /* 11n.png in Resources */,
