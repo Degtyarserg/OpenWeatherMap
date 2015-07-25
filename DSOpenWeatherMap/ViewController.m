@@ -144,7 +144,8 @@
     self.descriptionLabel.text = weatherMadel.weatherDescriotion;
     
     NSInteger condition = [[weather objectForKey:@"id"] integerValue];
-    BOOL nightTime = [weatherMadel isTimaNight:dictWithWeather];
+    NSString *stringWithIcon = [weather objectForKey:@"icon"];
+    BOOL nightTime = [weatherMadel isTimaNight:stringWithIcon];
     
     UIImage *icon = [weatherMadel updateWeatherIcon:condition isNight:nightTime];
     self.iconImageView.image = icon;

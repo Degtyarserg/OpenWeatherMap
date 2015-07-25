@@ -99,10 +99,10 @@ static NSInteger const tempK = 273;
         imageName = @"09d";
     };
     
-    if (condition > 500 && condition <= 504 && nightTine == YES) {
+    if (condition >= 500 && condition <= 504 && nightTine == YES) {
         imageName = @"10n";
     };
-    if (condition > 500 && condition <= 504 && nightTine == NO) {
+    if (condition >= 500 && condition <= 504 && nightTine == NO) {
         imageName = @"10d";
     };
     
@@ -173,18 +173,9 @@ static NSInteger const tempK = 273;
     return imageIcon;
 }
 
-- (BOOL)isTimaNight:(NSDictionary *)dictWithWeather {
+- (BOOL)isTimaNight:(NSString *)icon {
     
-    BOOL nightTime = NO;
-    NSTimeInterval nowTime = [[NSDate date] timeIntervalSince1970];
-    NSDictionary *sys = [dictWithWeather objectForKey:@"sys"];
-    double sunrise = [[sys objectForKey:@"sunrise"] doubleValue];
-    double sunset = [[sys objectForKey:@"sunset"] doubleValue];
-    
-    if (nowTime < sunrise || nowTime > sunset) {
-        nightTime = YES;
-    };
-    return nightTime;
+    return [icon rangeOfString:@"n"].location == 0;
 }
 
 - (void)weatherForLocation:(CLLocationCoordinate2D)geo {

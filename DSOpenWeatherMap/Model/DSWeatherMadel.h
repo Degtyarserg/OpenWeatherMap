@@ -31,7 +31,7 @@
 - (void)setRequest:(NSDictionary *)params;
 - (NSInteger)convertTemperature:(NSInteger)temperature;
 - (UIImage *)updateWeatherIcon:(NSInteger)condition isNight:(BOOL)nightTine;
-- (BOOL)isTimaNight:(NSDictionary *)dictWithWeather;
+- (BOOL)isTimaNight:(NSString *)icon;
 - (void)weatherForLocation:(CLLocationCoordinate2D)geo;
 - (NSString *)dateFromUnixFormat:(NSInteger)unixFormat;
 
