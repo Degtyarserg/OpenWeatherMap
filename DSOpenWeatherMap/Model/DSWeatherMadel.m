@@ -45,7 +45,7 @@ static NSInteger const tempK = 273;
 - (void)setRequest:(NSDictionary *)params {
     
     __weak DSWeatherMadel *weakSelf = self;
-    
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:kStringWithUrl parameters:params success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         NSLog(@"%@", responseObject);
@@ -75,10 +75,10 @@ static NSInteger const tempK = 273;
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:unixFormat];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"MMM dd, HH:mm"];
-    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-    NSString *dte=[dateFormatter stringFromDate:date];
+//    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    NSString *stringWithDate=[dateFormatter stringFromDate:date];
     
-    return dte;
+    return stringWithDate;
 }
 
 - (UIImage *)updateWeatherIcon:(NSInteger)condition isNight:(BOOL)nightTine {

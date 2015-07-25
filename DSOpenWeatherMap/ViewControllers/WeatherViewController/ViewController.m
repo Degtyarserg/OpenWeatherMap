@@ -9,7 +9,6 @@
 #import "ViewController.h"
 #import "DSWeatherMadel.h"
 #import <MBProgressHUD.h>
-#import <CoreLocation/CoreLocation.h>
 
 @interface ViewController () <DSWeatherMadelDelegate, CLLocationManagerDelegate>
 
@@ -171,13 +170,14 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
+    DSWeatherMadel *weatherModel = [[DSWeatherMadel alloc] init];
     NSLog(@"%@", manager.location);
     [self activityIndicatorHud];
-    CLLocation *currentLocation = [locations lastObject];
-    if (currentLocation.horizontalAccuracy > 0) {
+    weatherModel.currentLocation = [locations lastObject];
+    if (weatherModel.currentLocation.horizontalAccuracy > 0) {
         [self.locationManager stopUpdatingLocation];
         
-        CLLocationCoordinate2D coords  = CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
+        CLLocationCoordinate2D coords  = CLLocationCoordinate2DMake(weatherModel.currentLocation.coordinate.latitude, weatherModel.currentLocation.coordinate.longitude);
         
         [self.weatherModel weatherForLocation:coords];
     }

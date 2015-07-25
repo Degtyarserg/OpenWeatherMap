@@ -25,6 +25,7 @@
 @property (nonatomic, strong) NSString *weatherDescriotion;
 @property (nonatomic ,strong) NSString *weatherDate;
 @property (nonatomic, strong) UIImage *weatherIcon;
+@property (nonatomic, weak) CLLocation *currentLocation;
 @property (nonatomic, weak) id<DSWeatherMadelDelegate> delegate;
 
 - (void) weatherForCity:(NSString *)string;
