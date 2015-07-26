@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>97465EA4-B192-4CF0-91EC-79A588328659</string>
+	<key>IDESourceControlProjectName</key>
+	<string>DSOpenWeatherMap</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>3E75FAA63B20FB8D094F5C2E0EFB0276ECEBDCFA</key>
+		<string>https://github.com/Degtyarserg/OpenWeatherMap.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>DSOpenWeatherMap.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>3E75FAA63B20FB8D094F5C2E0EFB0276ECEBDCFA</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Degtyarserg/OpenWeatherMap.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>3E75FAA63B20FB8D094F5C2E0EFB0276ECEBDCFA</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3E75FAA63B20FB8D094F5C2E0EFB0276ECEBDCFA</string>
+			<key>IDESourceControlWCCName</key>
+			<string>DSOpenWeatherMap</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -18,46 +18,70 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="aHZ-Oe-lM5">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="ePi-Bg-5km" appends="YES" id="42d-Vp-JEr"/>
+                                </connections>
+                            </mapView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IxD-3C-ehz">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="I6O-xx-1Ha"/>
+                                    <constraint firstAttribute="width" constant="320" id="r5I-rD-0Nu"/>
+                                </constraints>
                                 <items>
-                                    <barButtonItem style="plain" id="gCy-AY-Us3">
-                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" segmentControlStyle="bar" selectedSegmentIndex="0" id="9hF-JY-DhF">
+                                    <barButtonItem width="215" style="plain" id="gCy-AY-Us3">
+                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="215" placeholderIntrinsicHeight="29" contentHorizontalAlignment="left" contentVerticalAlignment="center" segmentControlStyle="bar" selectedSegmentIndex="0" id="9hF-JY-DhF">
                                             <rect key="frame" x="-61" y="-14" width="123" height="29"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
-                                                <segment title="Standard"/>
-                                                <segment title="Satellite"/>
-                                                <segment title="Hybrid"/>
+                                                <segment title="Standard" width="71"/>
+                                                <segment title="Satellite" width="71"/>
+                                                <segment title="Hybrid" width="71"/>
                                             </segments>
                                             <connections>
                                                 <action selector="setMap:" destination="ut7-aS-dZs" eventType="valueChanged" id="3U1-WB-yfT"/>
                                             </connections>
                                         </segmentedControl>
                                     </barButtonItem>
-                                    <barButtonItem style="plain" id="9iJ-xe-FPf">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aEC-zL-kOa">
+                                    <barButtonItem width="5" style="plain" systemItem="flexibleSpace" id="ISv-zo-NRD"/>
+                                    <barButtonItem width="60" style="plain" id="CbH-Jj-0wr">
+                                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="5" maxY="0.0"/>
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2Ab-la-3fy">
                                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Location">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
-                                                <action selector="getLocation:" destination="ut7-aS-dZs" eventType="touchUpInside" id="rFz-O6-gq7"/>
+                                                <action selector="getLocation:" destination="ut7-aS-dZs" eventType="touchUpInside" id="hwO-lg-J3c"/>
                                             </connections>
                                         </button>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="fixedSpace" id="mkS-vq-SsM"/>
                                 </items>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="I6O-xx-1Ha"/>
+                                        <exclude reference="r5I-rD-0Nu"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="I6O-xx-1Ha"/>
+                                        <include reference="r5I-rD-0Nu"/>
+                                    </mask>
+                                </variation>
                             </toolbar>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="aHZ-Oe-lM5">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="aHZ-Oe-lM5" secondAttribute="centerX" id="4u2-kH-6oI"/>
+                            <constraint firstAttribute="trailing" secondItem="IxD-3C-ehz" secondAttribute="trailing" id="F1T-Ov-kZi"/>
                             <constraint firstItem="aHZ-Oe-lM5" firstAttribute="top" secondItem="bhn-js-6ue" secondAttribute="bottom" id="JlH-z5-9W2"/>
                             <constraint firstItem="IxD-3C-ehz" firstAttribute="top" secondItem="aHZ-Oe-lM5" secondAttribute="bottom" id="Saq-Lb-iJa"/>
+                            <constraint firstItem="IxD-3C-ehz" firstAttribute="leading" secondItem="WPa-J2-foq" secondAttribute="leading" id="SyU-2D-O2X"/>
                             <constraint firstItem="FoU-NG-9vs" firstAttribute="top" secondItem="IxD-3C-ehz" secondAttribute="bottom" id="bkU-3P-wAO"/>
                             <constraint firstItem="IxD-3C-ehz" firstAttribute="leading" secondItem="WPa-J2-foq" secondAttribute="leading" id="hgD-6l-AvX"/>
                             <constraint firstAttribute="trailing" secondItem="aHZ-Oe-lM5" secondAttribute="trailing" id="lgx-1L-aef"/>
@@ -66,15 +90,16 @@
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="IxD-3C-ehz"/>
                                 <exclude reference="aHZ-Oe-lM5"/>
+                                <exclude reference="IxD-3C-ehz"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="bkU-3P-wAO"/>
+                                <exclude reference="F1T-Ov-kZi"/>
                                 <exclude reference="Saq-Lb-iJa"/>
+                                <exclude reference="SyU-2D-O2X"/>
                                 <exclude reference="hgD-6l-AvX"/>
                                 <exclude reference="qHp-oB-oxB"/>
-                                <exclude reference="4u2-kH-6oI"/>
                                 <exclude reference="JlH-z5-9W2"/>
                                 <exclude reference="lgx-1L-aef"/>
                                 <exclude reference="pC1-ig-sZN"/>
@@ -82,15 +107,16 @@
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="IxD-3C-ehz"/>
                                 <include reference="aHZ-Oe-lM5"/>
+                                <include reference="IxD-3C-ehz"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="bkU-3P-wAO"/>
+                                <include reference="F1T-Ov-kZi"/>
                                 <include reference="Saq-Lb-iJa"/>
+                                <include reference="SyU-2D-O2X"/>
                                 <include reference="hgD-6l-AvX"/>
                                 <include reference="qHp-oB-oxB"/>
-                                <exclude reference="4u2-kH-6oI"/>
                                 <include reference="JlH-z5-9W2"/>
                                 <include reference="lgx-1L-aef"/>
                                 <include reference="pC1-ig-sZN"/>
@@ -105,6 +131,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hdu-GH-3Ab" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="ePi-Bg-5km">
+                    <connections>
+                        <action selector="longpressToGetLocation:" destination="ut7-aS-dZs" id="T9a-sB-VqC"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1482" y="-63"/>
         </scene>
@@ -457,7 +488,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Map" id="kEa-c2-oBf">
                             <connections>
-                                <segue destination="ut7-aS-dZs" kind="show" id="IPm-Yd-3o2"/>
+                                <segue destination="ut7-aS-dZs" kind="show" identifier="DSMapSegueID" id="IPm-Yd-3o2"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

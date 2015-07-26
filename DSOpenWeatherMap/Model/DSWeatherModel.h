@@ -15,26 +15,24 @@
 @interface DSWeatherModel : NSObject
 
 @property (nonatomic, strong) NSString *cityName;
-@property (nonatomic, strong) NSString *country;
-@property (nonatomic, assign) NSInteger weatherTemp;
-@property (nonatomic, assign) NSInteger weatherMaxTemp;
-@property (nonatomic, assign) NSInteger weatherMinTemp;
-@property (nonatomic, assign) NSInteger weatherHumidity;
-@property (nonatomic, strong) NSString *weatherDescriotion;
-@property (nonatomic ,strong) NSString *weatherDate;
-@property (nonatomic, strong) UIImage *weatherIcon;
-@property (nonatomic, assign) double weatherWind;
-@property (nonatomic, strong) NSNumber *cityLat;
-@property (nonatomic, strong) NSNumber *cityLon;
+@property (nonatomic, strong, readonly) NSString *country;
+@property (nonatomic, assign, readonly) NSInteger weatherTemp;
+@property (nonatomic, assign, readonly) NSInteger weatherMaxTemp;
+@property (nonatomic, assign, readonly) NSInteger weatherMinTemp;
+@property (nonatomic, assign, readonly) NSInteger weatherHumidity;
+@property (nonatomic, strong, readonly) NSString *weatherDescriotion;
+@property (nonatomic, strong, readonly) NSString *weatherDate;
+@property (nonatomic, strong, readonly) UIImage *weatherIcon;
+@property (nonatomic, assign, readonly) double weatherWind;
+@property (nonatomic, strong, readonly) NSNumber *cityLat;
+@property (nonatomic, strong, readonly) NSNumber *cityLon;
+@property (nonatomic, strong, readonly) NSString *stringWithTime;
+@property (nonatomic, strong, readonly) NSString *iconName;
 @property (nonatomic, weak) id<DSWeatherModelDelegate> delegate;
 
-- (void) weatherForCity:(NSString *)string;
+- (void)weatherForCity:(NSString *)string;
 - (void)setRequest:(NSDictionary *)params;
-- (NSInteger)convertTemperature:(NSInteger)temperature;
-- (UIImage *)updateWeatherIcon:(NSInteger)condition isNight:(BOOL)nightTine;
-- (BOOL)isTimaNight:(NSString *)icon;
 - (void)weatherForLocation:(CLLocationCoordinate2D)geo;
-- (NSString *)dateFromUnixFormat:(NSInteger)unixFormat;
 
 @end
 
@@ -42,7 +40,7 @@
 
 @required
 
-- (void)updateWeatherInfo:(NSDictionary *)dictWithWeather;
+- (void)weatherDataDidUpdated;
 - (void)failure;
 
 @end

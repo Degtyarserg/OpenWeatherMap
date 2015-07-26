@@ -12,17 +12,5 @@
 
 @interface DSWeatherViewController : UIViewController
 
-@property (nonatomic, weak) IBOutlet UIImageView *iconImageView;
-@property (nonatomic, weak) IBOutlet UILabel *cityLabel;
-@property (nonatomic, weak) IBOutlet UILabel *timeLabel;
-@property (nonatomic, weak) IBOutlet UILabel *maxTempLabel;
-@property (nonatomic, weak) IBOutlet UILabel *minTempLabel;
-@property (nonatomic, weak) IBOutlet UILabel *tempLabel;
-@property (nonatomic, weak) IBOutlet UILabel *windLabel;
-@property (nonatomic, weak) IBOutlet UILabel *humidityLabel;
-@property (nonatomic, weak) IBOutlet UILabel *descriptionLabel;
-
-- (IBAction)cityButton:(UIBarButtonItem *)sender;
-
 @end
 

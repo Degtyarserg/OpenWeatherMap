@@ -10,8 +10,22 @@
 #import "DSWeatherModel.h"
 #import <MBProgressHUD.h>
 #import <CoreLocation/CoreLocation.h>
+#import "DSMapViewController.h"
+
+static NSString * const kMapSegueID = @"DSMapSegueID";
+static NSString * const imageName = @"background";
 
 @interface DSWeatherViewController () <DSWeatherModelDelegate, CLLocationManagerDelegate>
+
+@property (nonatomic, weak) IBOutlet UIImageView *iconImageView;
+@property (nonatomic, weak) IBOutlet UILabel *cityLabel;
+@property (nonatomic, weak) IBOutlet UILabel *timeLabel;
+@property (nonatomic, weak) IBOutlet UILabel *maxTempLabel;
+@property (nonatomic, weak) IBOutlet UILabel *minTempLabel;
+@property (nonatomic, weak) IBOutlet UILabel *tempLabel;
+@property (nonatomic, weak) IBOutlet UILabel *windLabel;
+@property (nonatomic, weak) IBOutlet UILabel *humidityLabel;
+@property (nonatomic, weak) IBOutlet UILabel *descriptionLabel;
 
 @property (nonatomic, strong) NSURL *rootUrl;
 @property (nonatomic, strong) NSURLSession *session;
@@ -24,10 +38,10 @@
 
 #pragma mark - Life cycle
 
--(void)loadView {
+- (void)loadView {
     [super loadView];
     
-    UIImage *backgroundImage = [UIImage imageNamed:@"background"];
+    UIImage *backgroundImage = [UIImage imageNamed:imageName];
     self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
 }
 
@@ -37,16 +51,20 @@
     self.weatherModel = [[DSWeatherModel alloc] init];
     self.weatherModel.delegate = self;
     
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    [self.locationManager requestWhenInUseAuthorization];
+    [self setupLocationManager];
     
-    [self.locationManager startUpdatingLocation];
+    [self setTitle:NSLocalizedString(@"Weather", nil)];
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+#pragma mark - Segue methods
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:kMapSegueID]) {
+        DSMapViewController *mapVC = (DSMapViewController *)[segue destinationViewController];
+        mapVC.weatherModel = self.weatherModel;
+    }
 }
 
 #pragma mark - Action methods
@@ -56,32 +74,37 @@
     [self displayCityAlert];
 }
 
-#pragma mark - Helper methods
+#pragma mark - Privat methods
+
+- (void)setupLocationManager {
+    
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [self.locationManager requestWhenInUseAuthorization];
+    [self.locationManager startUpdatingLocation];
+}
 
 - (void)displayCityAlert {
     
     __weak DSWeatherViewController *weakSelf = self;
 
     UIAlertController *alertController = [UIAlertController
-                                          alertControllerWithTitle:@"City"
-                                          message:@"Enter city name"
+                                          alertControllerWithTitle:NSLocalizedString(@"City", nil)
+                                          message:NSLocalizedString(@"Enter city name", nil)
                                           preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *cancelAction = [UIAlertAction
-                                   actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel action")
+                                   actionWithTitle:NSLocalizedString(@"Cancel", nil)
                                    style:UIAlertActionStyleCancel
-                                   handler:^(UIAlertAction *action)
-                                   {
-                                       NSLog(@"Cancel action");
-                                   }];
+                                   handler:nil];
     
     UIAlertAction *okAction = [UIAlertAction
-                               actionWithTitle:NSLocalizedString(@"OK", @"OK action")
+                               actionWithTitle:NSLocalizedString(@"OK", nil)
                                style:UIAlertActionStyleDefault
                                handler:^(UIAlertAction *action)
                                {
-                                   NSLog(@"OK action");
-                                   [self activityIndicatorHud];
+                                   [weakSelf activityIndicatorHud];
                                    UITextField *textField = alertController.textFields.firstObject;
                                    [weakSelf.weatherModel weatherForCity:textField.text];
                                }];
@@ -90,7 +113,7 @@
     [alertController addAction:okAction];
     
     [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-        textField.placeholder = @"City name";
+        textField.placeholder = NSLocalizedString(@"City name", nil);
     }];
     
     [self presentViewController:alertController animated:YES completion:nil];
@@ -99,71 +122,40 @@
 - (void)activityIndicatorHud {
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-
+    
+    __weak DSWeatherViewController *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
     });
 }
 
 #pragma mark - DSWeatherModelDelegate methods
 
-- (void)updateWeatherInfo:(NSDictionary *)dictWithWeather {
+- (void)weatherDataDidUpdated {
     
-    DSWeatherModel *weatherMadel = [[DSWeatherModel alloc] init];
+    self.cityLabel.text = [NSString stringWithFormat:@"%@, %@", self.weatherModel.cityName, self.weatherModel.country];
+    self.timeLabel.text = self.weatherModel.stringWithTime;
     
-    weatherMadel.cityName = dictWithWeather[@"name"];
-    NSDictionary *sys = [dictWithWeather objectForKey:@"sys"];
-    weatherMadel.country = sys[@"country"];
-    self.cityLabel.text = [NSString stringWithFormat:@"%@, %@", weatherMadel.cityName, weatherMadel.country];
+    self.tempLabel.text = [NSString stringWithFormat:@"%li°", self.weatherModel.weatherTemp];
+    self.maxTempLabel.text = [NSString stringWithFormat:@"%li°", self.weatherModel.weatherMaxTemp];
+    self.minTempLabel.text = [NSString stringWithFormat:@"%li°", self.weatherModel.weatherMinTemp];
     
-    NSDictionary *coord = [dictWithWeather objectForKey:@"coord"];
-    weatherMadel.cityLat = [coord objectForKey:@"lat"];
-    weatherMadel.cityLon = [coord objectForKey:@"lon"];
+    self.humidityLabel.text = [NSString stringWithFormat:@"%li", self.weatherModel.weatherHumidity];
+    self.windLabel.text = [NSString stringWithFormat:@"%.2f", self.weatherModel.weatherWind];
+    self.descriptionLabel.text = self.weatherModel.weatherDescriotion;
     
-    NSInteger time = [[dictWithWeather objectForKey:@"dt"] integerValue];
-    NSString *stringWithTime = [weatherMadel dateFromUnixFormat:time];
-    self.timeLabel.text = stringWithTime;
-    
-    NSDictionary *main = [dictWithWeather objectForKey:@"main"];
-    NSInteger tempK = [main[@"temp"] integerValue];
-    NSInteger maxTempK = [main[@"temp_max"] integerValue];
-    NSInteger minTempK = [main[@"temp_min"] integerValue];
-    weatherMadel.weatherTemp = [weatherMadel convertTemperature:tempK];
-    weatherMadel.weatherMaxTemp = [weatherMadel convertTemperature:maxTempK];
-    weatherMadel.weatherMinTemp = [weatherMadel convertTemperature:minTempK];
-    self.tempLabel.text = [NSString stringWithFormat:@"%li°", weatherMadel.weatherTemp];
-    self.maxTempLabel.text = [NSString stringWithFormat:@"%li°", weatherMadel.weatherMaxTemp];
-    self.minTempLabel.text = [NSString stringWithFormat:@"%li°", weatherMadel.weatherMinTemp];
-    
-    weatherMadel.weatherHumidity = [main[@"humidity"]integerValue];
-    self.humidityLabel.text = [NSString stringWithFormat:@"%li", weatherMadel.weatherHumidity];
-    
-    NSDictionary *wind = [dictWithWeather objectForKey:@"wind"];
-    weatherMadel.weatherWind = [wind[@"speed"] doubleValue];
-    self.windLabel.text = [NSString stringWithFormat:@"%.2f", weatherMadel.weatherWind];
-    
-    NSArray *arrayWithWeather = [dictWithWeather objectForKey:@"weather"];
-    NSDictionary *weather = [arrayWithWeather objectAtIndex:0];
-    weatherMadel.weatherDescriotion = [weather objectForKey:@"description"];
-    self.descriptionLabel.text = weatherMadel.weatherDescriotion;
-    
-    NSInteger condition = [[weather objectForKey:@"id"] integerValue];
-    NSString *stringWithIcon = [weather objectForKey:@"icon"];
-    BOOL nightTime = [weatherMadel isTimaNight:stringWithIcon];
-    
-    UIImage *icon = [weatherMadel updateWeatherIcon:condition isNight:nightTime];
-    self.iconImageView.image = icon;
+    self.iconImageView.image = [UIImage imageNamed:self.weatherModel.iconName];
 }
 
 - (void)failure {
  
     UIAlertController *alertController = [UIAlertController
-                                          alertControllerWithTitle:@"Error"
-                                          message:@"No connection"
+                                          alertControllerWithTitle:NSLocalizedString(@"Error", nil)
+                                          message:NSLocalizedString(@"No connection", nil)
                                           preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *okAction = [UIAlertAction
-                               actionWithTitle:NSLocalizedString(@"OK", @"OK action")
+                               actionWithTitle:NSLocalizedString(@"OK", nil)
                                style:UIAlertActionStyleDefault
                                handler:nil];
     
@@ -175,22 +167,15 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
-    NSLog(@"%@", manager.location);
     [self activityIndicatorHud];
     CLLocation *currentLocation = [locations lastObject];
     if (currentLocation.horizontalAccuracy > 0) {
         [self.locationManager stopUpdatingLocation];
         
-        CLLocationCoordinate2D coords  = CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
-        
+        CLLocationCoordinate2D coords  = CLLocationCoordinate2DMake(currentLocation.coordinate.latitude,
+                                                                    currentLocation.coordinate.longitude);
         [self.weatherModel weatherForLocation:coords];
     }
-}
-
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-    
-    NSLog(@"Can't get your location");
-    NSLog(@"Error: %@", error);
 }
 
 @end

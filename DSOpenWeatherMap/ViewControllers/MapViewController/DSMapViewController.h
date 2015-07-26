@@ -8,10 +8,12 @@
 
 #import "DSWeatherViewController.h"
 #import <MapKit/MapKit.h>
+#import "DSWeatherModel.h"
 
-@interface DSMapViewController : DSWeatherViewController 
+@interface DSMapViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (nonatomic, weak) IBOutlet MKMapView *mapView;
+@property (nonatomic, strong) DSWeatherModel *weatherModel;
 
 - (IBAction)setMap:(UISegmentedControl *)sender;
 - (IBAction)getLocation:(id)sender;

@@ -7,7 +7,6 @@
 //
 
 #import "DSMapViewController.h"
-#import "DSWeatherModel.h"
 
 @interface DSMapViewController () <MKMapViewDelegate>
 
@@ -20,29 +19,34 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setTitle:self.weatherModel.cityName];
+    
     self.mapView.delegate = self;
-//    DSWeatherModel *weatherModel = [[DSWeatherModel alloc] init];
-    
-//    CLLocationCoordinate2D location = CLLocationCoordinate2DMake([weatherModel.cityLat doubleValue], [weatherModel.cityLon doubleValue]);
-    
-    CLLocationCoordinate2D location = CLLocationCoordinate2DMake(51.51, -0.13);
-
-    
-//    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-//    [annotation setCoordinate:location];
-//    annotation.title = weatherModel.cityName;
-//
-//    [self.mapView addAnnotation:annotation];
-    
-    MKCoordinateSpan span = MKCoordinateSpanMake(0.1, 0.1);
-    
-    MKCoordinateRegion region = MKCoordinateRegionMake(location, span);
-    
-    [self.mapView setRegion:region animated:YES];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self updateMapView];
+}
+
+# pragma mark - Privat methods
+
+- (void)updateMapView {
+    
+    CLLocationCoordinate2D location = CLLocationCoordinate2DMake([self.weatherModel.cityLat doubleValue],
+                                                                 [self.weatherModel.cityLon doubleValue]);
+    
+    MKCoordinateSpan span = MKCoordinateSpanMake(0.2, 0.2);
+    MKCoordinateRegion region = MKCoordinateRegionMake(location, span);
+    
+    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+    annotation.title = self.weatherModel.cityName;
+    annotation.subtitle = [NSString stringWithFormat:@"%li°", self.weatherModel.weatherTemp];
+    [annotation setCoordinate:location];
+
+    [self.mapView addAnnotation:annotation];
+    [self.mapView setRegion:region animated:YES];
 }
 
 #pragma mark - Action methods
@@ -72,17 +76,16 @@
 - (IBAction)getLocation:(id)sender {
     
     [self.mapView setShowsUserLocation:YES];
-    NSLog(@"My location");
 }
 
-- (void)longpressToGetLocation:(UIGestureRecognizer *)gestureRecognizer {
+- (IBAction)longpressToGetLocation:(UIGestureRecognizer *)gestureRecognizer {
     
     if (gestureRecognizer.state != UIGestureRecognizerStateBegan)
         return;
     
     CGPoint touchPoint = [gestureRecognizer locationInView:self.mapView];
-    CLLocationCoordinate2D location =
-    [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
+    CLLocationCoordinate2D location = [self.mapView convertPoint:touchPoint
+                                            toCoordinateFromView:self.mapView];
     
     NSLog(@"Location found from Map: %f %f",location.latitude,location.longitude);
 }
@@ -92,12 +95,5 @@
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
     self.mapView.centerCoordinate = userLocation.location.coordinate;
 }
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITouch *touch = [[event allTouches] anyObject];
-    CGPoint location = [touch locationInView:self.mapView];
-    NSLog(@"%f, %f", location.x, location.y);
-}
-
 
 @end
