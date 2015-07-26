@@ -10,10 +10,9 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
+@protocol DSWeatherModelDelegate;
 
-@protocol DSWeatherMadelDelegate;
-
-@interface DSWeatherMadel : NSObject
+@interface DSWeatherModel : NSObject
 
 @property (nonatomic, strong) NSString *cityName;
 @property (nonatomic, strong) NSString *country;
@@ -21,12 +20,13 @@
 @property (nonatomic, assign) NSInteger weatherMaxTemp;
 @property (nonatomic, assign) NSInteger weatherMinTemp;
 @property (nonatomic, assign) NSInteger weatherHumidity;
-@property (nonatomic, assign) double weatherWind;
 @property (nonatomic, strong) NSString *weatherDescriotion;
 @property (nonatomic ,strong) NSString *weatherDate;
 @property (nonatomic, strong) UIImage *weatherIcon;
-@property (nonatomic, weak) CLLocation *currentLocation;
-@property (nonatomic, weak) id<DSWeatherMadelDelegate> delegate;
+@property (nonatomic, assign) double weatherWind;
+@property (nonatomic, strong) NSNumber *cityLat;
+@property (nonatomic, strong) NSNumber *cityLon;
+@property (nonatomic, weak) id<DSWeatherModelDelegate> delegate;
 
 - (void) weatherForCity:(NSString *)string;
 - (void)setRequest:(NSDictionary *)params;
@@ -38,9 +38,10 @@
 
 @end
 
-@protocol DSWeatherMadelDelegate
+@protocol DSWeatherModelDelegate
 
 @required
+
 - (void)updateWeatherInfo:(NSDictionary *)dictWithWeather;
 - (void)failure;
 

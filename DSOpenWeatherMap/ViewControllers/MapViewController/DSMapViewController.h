@@ -6,11 +6,10 @@
 //  Copyright (c) 2015 Degtyar Serg. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "DSWeatherViewController.h"
 #import <MapKit/MapKit.h>
-#import <CloudKit/CloudKit.h>
 
-@interface MapViewController : ViewController 
+@interface DSMapViewController : DSWeatherViewController 
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 

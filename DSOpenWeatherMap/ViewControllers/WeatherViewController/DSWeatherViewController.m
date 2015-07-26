@@ -6,20 +6,21 @@
 //  Copyright (c) 2015 Degtyar Serg. All rights reserved.
 //
 
-#import "ViewController.h"
-#import "DSWeatherMadel.h"
+#import "DSWeatherViewController.h"
+#import "DSWeatherModel.h"
 #import <MBProgressHUD.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface ViewController () <DSWeatherMadelDelegate, CLLocationManagerDelegate>
+@interface DSWeatherViewController () <DSWeatherModelDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, strong) NSURL *rootUrl;
 @property (nonatomic, strong) NSURLSession *session;
-@property (nonatomic, strong) DSWeatherMadel *weatherModel;
+@property (nonatomic, strong) DSWeatherModel *weatherModel;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 
 @end
 
-@implementation ViewController
+@implementation DSWeatherViewController
 
 #pragma mark - Life cycle
 
@@ -33,7 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.weatherModel = [[DSWeatherMadel alloc] init];
+    self.weatherModel = [[DSWeatherModel alloc] init];
     self.weatherModel.delegate = self;
     
     self.locationManager = [[CLLocationManager alloc] init];
@@ -59,7 +60,7 @@
 
 - (void)displayCityAlert {
     
-    __weak ViewController *weakSelf = self;
+    __weak DSWeatherViewController *weakSelf = self;
 
     UIAlertController *alertController = [UIAlertController
                                           alertControllerWithTitle:@"City"
@@ -104,16 +105,20 @@
     });
 }
 
-#pragma mark - DSWeatherMadelDelegate methods
+#pragma mark - DSWeatherModelDelegate methods
 
 - (void)updateWeatherInfo:(NSDictionary *)dictWithWeather {
     
-    DSWeatherMadel *weatherMadel = [[DSWeatherMadel alloc] init];
+    DSWeatherModel *weatherMadel = [[DSWeatherModel alloc] init];
     
     weatherMadel.cityName = dictWithWeather[@"name"];
     NSDictionary *sys = [dictWithWeather objectForKey:@"sys"];
     weatherMadel.country = sys[@"country"];
     self.cityLabel.text = [NSString stringWithFormat:@"%@, %@", weatherMadel.cityName, weatherMadel.country];
+    
+    NSDictionary *coord = [dictWithWeather objectForKey:@"coord"];
+    weatherMadel.cityLat = [coord objectForKey:@"lat"];
+    weatherMadel.cityLon = [coord objectForKey:@"lon"];
     
     NSInteger time = [[dictWithWeather objectForKey:@"dt"] integerValue];
     NSString *stringWithTime = [weatherMadel dateFromUnixFormat:time];
@@ -170,14 +175,13 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
-    DSWeatherMadel *weatherModel = [[DSWeatherMadel alloc] init];
     NSLog(@"%@", manager.location);
     [self activityIndicatorHud];
-    weatherModel.currentLocation = [locations lastObject];
-    if (weatherModel.currentLocation.horizontalAccuracy > 0) {
+    CLLocation *currentLocation = [locations lastObject];
+    if (currentLocation.horizontalAccuracy > 0) {
         [self.locationManager stopUpdatingLocation];
         
-        CLLocationCoordinate2D coords  = CLLocationCoordinate2DMake(weatherModel.currentLocation.coordinate.latitude, weatherModel.currentLocation.coordinate.longitude);
+        CLLocationCoordinate2D coords  = CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
         
         [self.weatherModel weatherForLocation:coords];
     }

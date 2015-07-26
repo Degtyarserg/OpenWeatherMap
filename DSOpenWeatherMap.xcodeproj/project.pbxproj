@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		455AC9541B61CC4000B3C1B5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 455AC9531B61CC4000B3C1B5 /* CoreLocation.framework */; };
 		455D447F1B62D9200028FF76 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 455D447E1B62D9200028FF76 /* background.png */; };
-		455FE7931B639AB80043BD32 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 455FE7921B639AB80043BD32 /* ViewController.m */; };
+		455FE7931B639AB80043BD32 /* DSWeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 455FE7921B639AB80043BD32 /* DSWeatherViewController.m */; };
 		455FE7951B639B240043BD32 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 455FE7941B639B240043BD32 /* MapKit.framework */; };
-		455FE7981B639B4F0043BD32 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 455FE7971B639B4F0043BD32 /* MapViewController.m */; };
+		455FE7981B639B4F0043BD32 /* DSMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 455FE7971B639B4F0043BD32 /* DSMapViewController.m */; };
 		456F6DC71B601EC10052E638 /* 01d.png in Resources */ = {isa = PBXBuildFile; fileRef = 456F6DB51B601EC10052E638 /* 01d.png */; };
 		456F6DC81B601EC10052E638 /* 01n.png in Resources */ = {isa = PBXBuildFile; fileRef = 456F6DB61B601EC10052E638 /* 01n.png */; };
 		456F6DC91B601EC10052E638 /* 02d.png in Resources */ = {isa = PBXBuildFile; fileRef = 456F6DB71B601EC10052E638 /* 02d.png */; };
@@ -36,7 +36,7 @@
 		45E5E6B51B5EE2530016BA52 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45E5E6B41B5EE2530016BA52 /* Images.xcassets */; };
 		45E5E6B81B5EE2530016BA52 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45E5E6B61B5EE2530016BA52 /* LaunchScreen.xib */; };
 		45E5E6C41B5EE2530016BA52 /* DSOpenWeatherMapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E5E6C31B5EE2530016BA52 /* DSOpenWeatherMapTests.m */; };
-		45E5E6D01B5EF0FC0016BA52 /* DSWeatherMadel.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E5E6CF1B5EF0FC0016BA52 /* DSWeatherMadel.m */; };
+		45E5E6D01B5EF0FC0016BA52 /* DSWeatherModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E5E6CF1B5EF0FC0016BA52 /* DSWeatherModel.m */; };
 		4635EF94ADE3CE3A84FC3608 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C8F2120388D2D589F21975A4 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -54,11 +54,11 @@
 		2974EC08352114C0DA29FFF9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		455AC9531B61CC4000B3C1B5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		455D447E1B62D9200028FF76 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
-		455FE7911B639AB80043BD32 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		455FE7921B639AB80043BD32 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		455FE7911B639AB80043BD32 /* DSWeatherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSWeatherViewController.h; sourceTree = "<group>"; };
+		455FE7921B639AB80043BD32 /* DSWeatherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSWeatherViewController.m; sourceTree = "<group>"; };
 		455FE7941B639B240043BD32 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		455FE7961B639B4F0043BD32 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
-		455FE7971B639B4F0043BD32 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		455FE7961B639B4F0043BD32 /* DSMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSMapViewController.h; sourceTree = "<group>"; };
+		455FE7971B639B4F0043BD32 /* DSMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSMapViewController.m; sourceTree = "<group>"; };
 		456F6DB51B601EC10052E638 /* 01d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01d.png; sourceTree = "<group>"; };
 		456F6DB61B601EC10052E638 /* 01n.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01n.png; sourceTree = "<group>"; };
 		456F6DB71B601EC10052E638 /* 02d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 02d.png; sourceTree = "<group>"; };
@@ -88,8 +88,8 @@
 		45E5E6BD1B5EE2530016BA52 /* DSOpenWeatherMapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DSOpenWeatherMapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		45E5E6C21B5EE2530016BA52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45E5E6C31B5EE2530016BA52 /* DSOpenWeatherMapTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSOpenWeatherMapTests.m; sourceTree = "<group>"; };
-		45E5E6CE1B5EF0FC0016BA52 /* DSWeatherMadel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSWeatherMadel.h; sourceTree = "<group>"; };
-		45E5E6CF1B5EF0FC0016BA52 /* DSWeatherMadel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSWeatherMadel.m; sourceTree = "<group>"; };
+		45E5E6CE1B5EF0FC0016BA52 /* DSWeatherModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSWeatherModel.h; sourceTree = "<group>"; };
+		45E5E6CF1B5EF0FC0016BA52 /* DSWeatherModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSWeatherModel.m; sourceTree = "<group>"; };
 		C4B70F264B33D5C6A67B9750 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C8F2120388D2D589F21975A4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -138,8 +138,8 @@
 		455FE78F1B639A4F0043BD32 /* MapViewController */ = {
 			isa = PBXGroup;
 			children = (
-				455FE7961B639B4F0043BD32 /* MapViewController.h */,
-				455FE7971B639B4F0043BD32 /* MapViewController.m */,
+				455FE7961B639B4F0043BD32 /* DSMapViewController.h */,
+				455FE7971B639B4F0043BD32 /* DSMapViewController.m */,
 			);
 			path = MapViewController;
 			sourceTree = "<group>";
@@ -147,8 +147,8 @@
 		455FE7901B639A4F0043BD32 /* WeatherViewController */ = {
 			isa = PBXGroup;
 			children = (
-				455FE7911B639AB80043BD32 /* ViewController.h */,
-				455FE7921B639AB80043BD32 /* ViewController.m */,
+				455FE7911B639AB80043BD32 /* DSWeatherViewController.h */,
+				455FE7921B639AB80043BD32 /* DSWeatherViewController.m */,
 			);
 			path = WeatherViewController;
 			sourceTree = "<group>";
@@ -244,8 +244,8 @@
 		45E5E6CD1B5EF0BF0016BA52 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				45E5E6CE1B5EF0FC0016BA52 /* DSWeatherMadel.h */,
-				45E5E6CF1B5EF0FC0016BA52 /* DSWeatherMadel.m */,
+				45E5E6CE1B5EF0FC0016BA52 /* DSWeatherModel.h */,
+				45E5E6CF1B5EF0FC0016BA52 /* DSWeatherModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -413,10 +413,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45E5E6D01B5EF0FC0016BA52 /* DSWeatherMadel.m in Sources */,
+				45E5E6D01B5EF0FC0016BA52 /* DSWeatherModel.m in Sources */,
 				45E5E6AD1B5EE2530016BA52 /* AppDelegate.m in Sources */,
-				455FE7981B639B4F0043BD32 /* MapViewController.m in Sources */,
-				455FE7931B639AB80043BD32 /* ViewController.m in Sources */,
+				455FE7981B639B4F0043BD32 /* DSMapViewController.m in Sources */,
+				455FE7931B639AB80043BD32 /* DSWeatherViewController.m in Sources */,
 				45E5E6AA1B5EE2530016BA52 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

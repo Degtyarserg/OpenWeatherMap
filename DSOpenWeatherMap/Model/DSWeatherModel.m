@@ -6,32 +6,19 @@
 //  Copyright (c) 2015 Degtyar Serg. All rights reserved.
 //
 
-#import "DSWeatherMadel.h"
+#import "DSWeatherModel.h"
 #import <AFNetworking.h>
 
 static NSString * const kStringWithUrl = @"http://api.openweathermap.org/data/2.5/weather/?";
 static NSInteger const tempK = 273;
 
-@interface DSWeatherMadel ()
+@interface DSWeatherModel ()
 
 @property (nonatomic, strong) AFHTTPRequestOperationManager *requestOperationManager;
 
 @end
 
-@implementation DSWeatherMadel
-
-#pragma mark - init/dealloc methods
-
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        
-        NSURL *url = [NSURL URLWithString:kStringWithUrl];
-        self.requestOperationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
-    }
-    return self;
-}
+@implementation DSWeatherModel
 
 #pragma mark Pablic methods
 
@@ -39,13 +26,15 @@ static NSInteger const tempK = 273;
     
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:string, @"q", nil];
     [self setRequest:params];
-    
    }
 
 - (void)setRequest:(NSDictionary *)params {
     
-    __weak DSWeatherMadel *weakSelf = self;
-
+    __weak DSWeatherModel *weakSelf = self;
+    
+    NSURL *url = [NSURL URLWithString:kStringWithUrl];
+    self.requestOperationManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:kStringWithUrl parameters:params success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         NSLog(@"%@", responseObject);
@@ -54,13 +43,11 @@ static NSInteger const tempK = 273;
             [weakSelf.delegate updateWeatherInfo:responseObject];
         });
         
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         NSLog(@"Error: %@", error);
         [self.delegate failure];
     }];
-
 }
 
 - (NSInteger)convertTemperature:(NSInteger)temperature {
@@ -75,7 +62,6 @@ static NSInteger const tempK = 273;
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:unixFormat];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"MMM dd, HH:mm"];
-//    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
     NSString *stringWithDate=[dateFormatter stringFromDate:date];
     
     return stringWithDate;
